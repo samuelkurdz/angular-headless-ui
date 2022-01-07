@@ -119,6 +119,49 @@
       },
       "tags": [],
       "implicitDependencies": ["demo"]
+    },
+    "ui-tabs": {
+      "projectType": "library",
+      "root": "libs/ui/tabs",
+      "sourceRoot": "libs/ui/tabs/src",
+      "prefix": "headless",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/ui/tabs"],
+          "options": {
+            "project": "libs/ui/tabs/ng-package.json",
+            "tailwindConfig": "libs/ui/tabs/tailwind.config.js"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/ui/tabs/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/ui/tabs/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/tabs"],
+          "options": {
+            "jestConfig": "libs/ui/tabs/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ui/tabs/src/**/*.ts",
+              "libs/ui/tabs/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     }
   }
 }
