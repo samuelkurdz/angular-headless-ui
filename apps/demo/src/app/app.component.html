@@ -6,11 +6,26 @@
 
     <headless-tablist>
       <headless-tab
-        [id]="tab"
-        *ngFor="let tab of ['Recent', 'Popular', 'Trending']"
+        [id]="tab" (selectedTabIndex)="updateSelected($event)"
+        [class.text-red-600]="selectedIndex === index"
+        *ngFor="let tab of ['Recent', 'Popular', 'Trending', 'Not found']; let index = index"
       >
         {{ tab }}
       </headless-tab>
     </headless-tablist>
+    <headless-tab-panel class="flex bg-white rounded-xl p-3" [panelTemplates]="[recent, popular, trending]">
+    </headless-tab-panel>
   </div>
 </div>
+
+<ng-template #recent>
+  <ng-container>
+    <div class="text-green-500">recent</div>
+  </ng-container>
+</ng-template>
+<ng-template #popular>
+  <div class="text-yellow-500">popular</div>
+</ng-template>
+<ng-template #trending>
+  <div class="text-fuchsia-700">trending</div>
+</ng-template>

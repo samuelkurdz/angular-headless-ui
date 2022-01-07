@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'demo';
+  selectedIndex = 0;
 
   tabData = {
     Recent: [
@@ -58,5 +59,9 @@ export class AppComponent {
       },
     ],
   };
+
+  updateSelected(index: number) {
+    this.selectedIndex =  index;
+  }
 
 }

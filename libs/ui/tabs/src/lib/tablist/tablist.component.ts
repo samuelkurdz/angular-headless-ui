@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'headless-tablist',
-  templateUrl: './tablist.component.html',
-  styleUrls: ['./tablist.component.scss']
+  template: `<ng-content></ng-content>`,
 })
 export class TablistComponent  {
 
