@@ -1,6 +1,16 @@
 <div class="min-h-screen bg-gray-900 text-gray-100">
-  <div class=" max-w-7xl mx-auto">
+  <div class="max-w-7xl mx-auto">
     <headless-header></headless-header>
-    <h1>Getting started</h1>
+    <!-- <h1>Getting started</h1> -->
+    <div class="h-10"></div>
+
+    <headless-tablist>
+      <headless-tab
+        [id]="tab"
+        *ngFor="let tab of ['Recent', 'Popular', 'Trending']"
+      >
+        {{ tab }}
+      </headless-tab>
+    </headless-tablist>
   </div>
 </div>
