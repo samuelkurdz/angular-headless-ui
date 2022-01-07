@@ -27,9 +27,7 @@ export class TabComponent implements OnDestroy  {
   @HostListener('click', ['$event']) onClick(event: any) {
     const parentNode = event.target.parentNode;
     const index = Array.prototype.indexOf.call(parentNode.children, event.target);
-    if (this.disabled) {
-      return;
-    }
+    if (this.disabled) return;
     if (this.currentPanelIndex !== index) this.tabService.changeMessage(index);
   }
 

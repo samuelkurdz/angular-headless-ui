@@ -20,7 +20,7 @@
       <headless-tablist class="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
         <headless-tab
           class="w-full cursor-pointer py-2.5 text-sm text-center leading-5 font-medium text-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white ring-opacity-60"
-          [id]="tab" (selectedTabIndex)="updateSelected($event)" [disabled]=" index === 2"
+          [id]="tab" (selectedTabIndex)="updateSelected($event)"
           [ngClass]="selectedIndex === index ? 'bg-white shadow' : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'"
           *ngFor="let tab of ['Recent', 'Popular', 'Trending']; let index = index"
         >
@@ -38,12 +38,97 @@
 
 <ng-template #recent>
   <ng-container>
-    <div class="text-green-500">recent</div>
+    <ul class="w-full">
+        <li class="relative p-3 rounded-md hover:bg-gray-100">
+          <h3 class="text-sm font-medium leading-5 text-black">
+            Does drinking coffee make you smarter?
+          </h3>
+          <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
+            <li>5h ago</li>
+            <li>&middot;</li>
+            <li>5 comments</li>
+            <li>&middot;</li>
+            <li>2 shares</li>
+          </ul>
+          <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
+        </li>
+        <li class="relative p-3 rounded-md hover:bg-gray-100">
+          <h3 class="text-sm font-medium leading-5 text-black">
+            So you've bought coffee... now what?
+          </h3>
+          <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
+            <li>2h ago</li>
+            <li>&middot;</li>
+            <li>4 comments</li>
+            <li>&middot;</li>
+            <li>5 shares</li>
+          </ul>
+          <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
+        </li>
+    </ul>
   </ng-container>
 </ng-template>
 <ng-template #popular>
-  <div class="text-yellow-500">popular</div>
+  <ng-container>
+    <ul class="w-full">
+        <li class="relative p-3 rounded-md hover:bg-gray-100">
+          <h3 class="text-sm font-medium leading-5 text-black">
+            Is tech making coffee better or worse?
+          </h3>
+          <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
+            <li>5d ago</li>
+            <li>&middot;</li>
+            <li>15 comments</li>
+            <li>&middot;</li>
+            <li>5 shares</li>
+          </ul>
+          <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
+        </li>
+        <li class="relative p-3 rounded-md hover:bg-gray-100">
+          <h3 class="text-sm font-medium leading-5 text-black">
+            The most innovative things happening in coffee
+          </h3>
+          <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
+            <li>2d ago</li>
+            <li>&middot;</li>
+            <li>4 comments</li>
+            <li>&middot;</li>
+            <li>5 shares</li>
+          </ul>
+          <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
+        </li>
+    </ul>
+  </ng-container>
 </ng-template>
 <ng-template #trending>
-  <div class="text-fuchsia-700">trending</div>
+  <ng-container>
+    <ul class="w-full">
+        <li class="relative p-3 rounded-md hover:bg-gray-100">
+          <h3 class="text-sm font-medium leading-5 text-black">
+            Ask Me Anything: 10 answers to your questions about coffee
+          </h3>
+          <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
+            <li>5h ago</li>
+            <li>&middot;</li>
+            <li>5 comments</li>
+            <li>&middot;</li>
+            <li>2 shares</li>
+          </ul>
+          <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
+        </li>
+        <li class="relative p-3 rounded-md hover:bg-gray-100">
+          <h3 class="text-sm font-medium leading-5 text-black">
+            The worst advice we've ever heard about coffee
+          </h3>
+          <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
+            <li>2h ago</li>
+            <li>&middot;</li>
+            <li>4 comments</li>
+            <li>&middot;</li>
+            <li>5 shares</li>
+          </ul>
+          <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
+        </li>
+    </ul>
+  </ng-container>
 </ng-template>
