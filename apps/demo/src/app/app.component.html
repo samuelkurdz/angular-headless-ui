@@ -1,87 +1,11 @@
 <div class="min-h-screen bg-gray-900  text-gray-100">
   <div class="max-w-7xl mx-auto">
     <headless-header></headless-header>
-    <!-- <h1>Getting started</h1> -->
-    <div class="h-10"></div>
 
-    <!-- <headless-tablist>
-      <headless-tab
-        [id]="tab" (selectedTabIndex)="updateSelected($event)"
-        [class.text-red-600]="selectedIndex === index"
-        *ngFor="let tab of ['Recent', 'Popular', 'Trending', 'Not found']; let index = index"
-      >
-        {{ tab }}
-      </headless-tab>
-    </headless-tablist>
-    <headless-tab-panel class="flex bg-white rounded-xl p-3" [panelTemplates]="[recent, popular, trending]">
-    </headless-tab-panel> -->
+    <!-- <headless-demo-tabs></headless-demo-tabs> -->
 
-    <div class="w-full max-w-md mx-auto px-2 py-16 sm:px-0">
-      <headless-tablist class="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
-        <headless-tab
-          class="w-full cursor-pointer py-2.5 text-sm text-center leading-5 font-medium text-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white ring-opacity-60"
-          (tabIndexChange)="updateSelected($event)" *ngFor="let tab of ['Recent', 'Popular', 'Trending']; let index = index"
-        >
-          {{ tab }}
-        </headless-tab>
-      </headless-tablist>
-      <headless-tab-panel
-        class="flex bg-white rounded-xl p-3 mt-3"
-        [panelTemplates]="[recent, popular, trending]"
-      >
-      </headless-tab-panel>
-    </div>
+    <headless-demo-radio></headless-demo-radio>
   </div>
 </div>
 
-<ng-template #recent>
-  <ul class="w-full">
-    <li class="relative p-3 rounded-md hover:bg-gray-100" *ngFor="let item of tabData.Recent">
-      <h3 class="text-sm font-medium leading-5 text-black">
-        {{item.title}}
-      </h3>
-      <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
-        <li>{{item.date}}</li>
-        <li>&middot;</li>
-        <li>{{item.commentCount}} comments</li>
-        <li>&middot;</li>
-        <li>{{item.shareCount}} shares</li>
-      </ul>
-      <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
-    </li>
-</ul>
-</ng-template>
-<ng-template #popular>
-  <ul class="w-full">
-    <li class="relative p-3 rounded-md hover:bg-gray-100" *ngFor="let item of tabData.Popular">
-      <h3 class="text-sm font-medium leading-5 text-black">
-        {{item.title}}
-      </h3>
-      <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
-        <li>{{item.date}}</li>
-        <li>&middot;</li>
-        <li>{{item.commentCount}} comments</li>
-        <li>&middot;</li>
-        <li>{{item.shareCount}} shares</li>
-      </ul>
-      <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
-    </li>
-</ul>
-</ng-template>
-<ng-template #trending>
-  <ul class="w-full">
-    <li class="relative p-3 rounded-md hover:bg-gray-100" *ngFor="let item of tabData.Trending">
-      <h3 class="text-sm font-medium leading-5 text-black">
-        {{item.title}}
-      </h3>
-      <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
-        <li>{{item.date}}</li>
-        <li>&middot;</li>
-        <li>{{item.commentCount}} comments</li>
-        <li>&middot;</li>
-        <li>{{item.shareCount}} shares</li>
-      </ul>
-      <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
-    </li>
-  </ul>
-</ng-template>
+
