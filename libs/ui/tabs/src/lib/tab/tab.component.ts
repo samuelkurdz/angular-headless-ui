@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnDestroy, Output } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { TabService } from '../tab.service';
 
@@ -10,6 +10,7 @@ export class TabComponent implements OnDestroy  {
   @Output() selectedTabIndex = new EventEmitter<number>();
   destroy$: Subject<boolean> = new Subject<boolean>();
   currentPanelIndex!: number;
+  @Input() disabled!: boolean;
 
   constructor(
     private tabService: TabService
@@ -26,6 +27,7 @@ export class TabComponent implements OnDestroy  {
   @HostListener('click', ['$event']) onClick(event: any) {
     const parentNode = event.target.parentNode;
     const index = Array.prototype.indexOf.call(parentNode.children, event.target);
+    if (this.disabled) return;
     if (this.currentPanelIndex !== index) this.tabService.changeMessage(index);
   }
 
