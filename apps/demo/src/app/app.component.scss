@@ -1,6 +1,10 @@
-.selected {
+.selected-headless-tab {
   @apply bg-white shadow;
 }
-.notSelected {
+.unselected-headless-tab {
   @apply text-blue-100 hover:bg-white/[0.12] hover:text-white;
+}
+
+.disabled-headless-tab {
+  @apply text-red-300 bg-yellow-700 hover:bg-white/[0.12] hover:text-white;
 }
