@@ -37,98 +37,53 @@
 </div>
 
 <ng-template #recent>
-  <ng-container>
-    <ul class="w-full">
-        <li class="relative p-3 rounded-md hover:bg-gray-100">
-          <h3 class="text-sm font-medium leading-5 text-black">
-            Does drinking coffee make you smarter?
-          </h3>
-          <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
-            <li>5h ago</li>
-            <li>&middot;</li>
-            <li>5 comments</li>
-            <li>&middot;</li>
-            <li>2 shares</li>
-          </ul>
-          <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
-        </li>
-        <li class="relative p-3 rounded-md hover:bg-gray-100">
-          <h3 class="text-sm font-medium leading-5 text-black">
-            So you've bought coffee... now what?
-          </h3>
-          <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
-            <li>2h ago</li>
-            <li>&middot;</li>
-            <li>4 comments</li>
-            <li>&middot;</li>
-            <li>5 shares</li>
-          </ul>
-          <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
-        </li>
-    </ul>
-  </ng-container>
+  <ul class="w-full">
+    <li class="relative p-3 rounded-md hover:bg-gray-100" *ngFor="let item of tabData.Recent">
+      <h3 class="text-sm font-medium leading-5 text-black">
+        {{item.title}}
+      </h3>
+      <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
+        <li>{{item.date}}</li>
+        <li>&middot;</li>
+        <li>{{item.commentCount}} comments</li>
+        <li>&middot;</li>
+        <li>{{item.shareCount}} shares</li>
+      </ul>
+      <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
+    </li>
+</ul>
 </ng-template>
 <ng-template #popular>
-  <ng-container>
-    <ul class="w-full">
-        <li class="relative p-3 rounded-md hover:bg-gray-100">
-          <h3 class="text-sm font-medium leading-5 text-black">
-            Is tech making coffee better or worse?
-          </h3>
-          <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
-            <li>5d ago</li>
-            <li>&middot;</li>
-            <li>15 comments</li>
-            <li>&middot;</li>
-            <li>5 shares</li>
-          </ul>
-          <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
-        </li>
-        <li class="relative p-3 rounded-md hover:bg-gray-100">
-          <h3 class="text-sm font-medium leading-5 text-black">
-            The most innovative things happening in coffee
-          </h3>
-          <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
-            <li>2d ago</li>
-            <li>&middot;</li>
-            <li>4 comments</li>
-            <li>&middot;</li>
-            <li>5 shares</li>
-          </ul>
-          <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
-        </li>
-    </ul>
-  </ng-container>
+  <ul class="w-full">
+    <li class="relative p-3 rounded-md hover:bg-gray-100" *ngFor="let item of tabData.Popular">
+      <h3 class="text-sm font-medium leading-5 text-black">
+        {{item.title}}
+      </h3>
+      <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
+        <li>{{item.date}}</li>
+        <li>&middot;</li>
+        <li>{{item.commentCount}} comments</li>
+        <li>&middot;</li>
+        <li>{{item.shareCount}} shares</li>
+      </ul>
+      <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
+    </li>
+</ul>
 </ng-template>
 <ng-template #trending>
-  <ng-container>
-    <ul class="w-full">
-        <li class="relative p-3 rounded-md hover:bg-gray-100">
-          <h3 class="text-sm font-medium leading-5 text-black">
-            Ask Me Anything: 10 answers to your questions about coffee
-          </h3>
-          <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
-            <li>5h ago</li>
-            <li>&middot;</li>
-            <li>5 comments</li>
-            <li>&middot;</li>
-            <li>2 shares</li>
-          </ul>
-          <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
-        </li>
-        <li class="relative p-3 rounded-md hover:bg-gray-100">
-          <h3 class="text-sm font-medium leading-5 text-black">
-            The worst advice we've ever heard about coffee
-          </h3>
-          <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
-            <li>2h ago</li>
-            <li>&middot;</li>
-            <li>4 comments</li>
-            <li>&middot;</li>
-            <li>5 shares</li>
-          </ul>
-          <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
-        </li>
-    </ul>
-  </ng-container>
+  <ul class="w-full">
+    <li class="relative p-3 rounded-md hover:bg-gray-100" *ngFor="let item of tabData.Trending">
+      <h3 class="text-sm font-medium leading-5 text-black">
+        {{item.title}}
+      </h3>
+      <ul class="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
+        <li>{{item.date}}</li>
+        <li>&middot;</li>
+        <li>{{item.commentCount}} comments</li>
+        <li>&middot;</li>
+        <li>{{item.shareCount}} shares</li>
+      </ul>
+      <a href="#" class='absolute inset-0 rounded-md focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'></a>
+    </li>
+  </ul>
 </ng-template>
