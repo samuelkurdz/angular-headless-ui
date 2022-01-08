@@ -46,9 +46,9 @@ export class TabComponent implements OnDestroy, OnInit  {
     if (this.currentPanelIndex !== index) this.tabService.changeCurrentTabIndex(index);
   }
 
-  // @HostBinding('class.selected') get isSelected() { return this.selected}
-  // @HostBinding('class.notSelected') get isNotSelected() { return !this.selected}
-  // @HostBinding('class.disabled') get isDisabled() { return this.disabled}
+  @HostBinding('class.selected-headless-tab') get isSelected() { return this.selected}
+  @HostBinding('class.unselected-headless-tab') get isNotSelected() { return !this.selected}
+  @HostBinding('class.disabled-headless-tab') get isDisabled() { return this.disabled}
 
   ngOnDestroy() {
     this.destroy$.next(true);
