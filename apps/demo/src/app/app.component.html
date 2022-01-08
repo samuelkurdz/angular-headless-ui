@@ -20,9 +20,7 @@
       <headless-tablist class="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
         <headless-tab
           class="w-full cursor-pointer py-2.5 text-sm text-center leading-5 font-medium text-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white ring-opacity-60"
-          [id]="tab" (selectedTabIndex)="updateSelected($event)"
-          [ngClass]="selectedIndex === index ? 'bg-white shadow' : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'"
-          *ngFor="let tab of ['Recent', 'Popular', 'Trending']; let index = index"
+          (tabIndexChange)="updateSelected($event)" *ngFor="let tab of ['Recent', 'Popular', 'Trending']; let index = index"
         >
           {{ tab }}
         </headless-tab>

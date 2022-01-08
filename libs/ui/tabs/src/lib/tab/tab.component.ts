@@ -7,7 +7,8 @@ import { TabService } from '../tab.service';
   template: `<ng-content></ng-content>`,
 })
 export class TabComponent implements OnDestroy, OnInit  {
-  @Output() selectedTabIndex = new EventEmitter<number>();
+  // event which is fired when change in selected tab occurs, returns index of selected tab
+  @Output() tabIndexChange = new EventEmitter<number>();
   @Input() disabled!: boolean;
 
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -27,7 +28,7 @@ export class TabComponent implements OnDestroy, OnInit  {
     .subscribe(index => {
       if (index === undefined) return;
       this.currentPanelIndex = index;
-      this.selectedTabIndex.emit(index);
+      this.tabIndexChange.emit(index);
 
 
       const parentNode = this.ref.nativeElement.parentNode;
