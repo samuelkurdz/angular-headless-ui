@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnDestroy, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { TabService } from '../tab.service';
 
@@ -6,30 +6,49 @@ import { TabService } from '../tab.service';
   selector: 'headless-tab',
   template: `<ng-content></ng-content>`,
 })
-export class TabComponent implements OnDestroy  {
+export class TabComponent implements OnDestroy, OnInit  {
   @Output() selectedTabIndex = new EventEmitter<number>();
-  destroy$: Subject<boolean> = new Subject<boolean>();
-  currentPanelIndex!: number;
   @Input() disabled!: boolean;
 
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  currentPanelIndex!: number;
+  selected = false;
+
   constructor(
-    private tabService: TabService
+    private tabService: TabService,
+    private ref: ElementRef
   ) {
+
+  }
+
+  ngOnInit() {
     this.tabService.currentPanelIndex
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(index => {
-        this.currentPanelIndex = index;
-        this.selectedTabIndex.emit(index);
-      });
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(index => {
+      if (index === undefined) return;
+      this.currentPanelIndex = index;
+      this.selectedTabIndex.emit(index);
+
+
+      const parentNode = this.ref.nativeElement.parentNode;
+      const refIndex = Array.prototype.indexOf.call(parentNode.children, this.ref.nativeElement);
+      this.selected = index === refIndex;
+    });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @HostListener('click', ['$event']) onClick(event: any) {
+    // console.log(event);
     const parentNode = event.target.parentNode;
     const index = Array.prototype.indexOf.call(parentNode.children, event.target);
     if (this.disabled) return;
-    if (this.currentPanelIndex !== index) this.tabService.changeMessage(index);
+    // update tabIndex only if previous index != index of tab on which click event occures
+    if (this.currentPanelIndex !== index) this.tabService.changeCurrentTabIndex(index);
   }
+
+  @HostBinding('class.selected-headless-tab') get isSelected() { return this.selected}
+  @HostBinding('class.unselected-headless-tab') get isNotSelected() { return !this.selected}
+  @HostBinding('class.disabled-headless-tab') get isDisabled() { return this.disabled}
 
   ngOnDestroy() {
     this.destroy$.next(true);

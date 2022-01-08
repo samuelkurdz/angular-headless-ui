@@ -23,8 +23,8 @@ export class TabPanelComponent implements AfterViewInit, OnDestroy {
     this.tabService.currentPanelIndex
       .pipe(takeUntil(this.destroy$))
       .subscribe(index => {
+        if (index === undefined) return;
         this.panel.clear();
-        
         if (index > this.panelTemplates.length - 1) {
           console.error('Not tab panel template provided');
         } else {

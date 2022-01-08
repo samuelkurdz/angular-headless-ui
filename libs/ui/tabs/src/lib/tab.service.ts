@@ -9,7 +9,7 @@ export class TabService {
   private panelIndexSource = new BehaviorSubject<number>(0);
   currentPanelIndex = this.panelIndexSource.asObservable();
 
-  changeMessage(panelIndex: number) {
+  changeCurrentTabIndex(panelIndex: number) {
     this.panelIndexSource.next(panelIndex)
   }
 }
