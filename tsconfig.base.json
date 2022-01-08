@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@ngheadlessui/radio": ["libs/ui/radio/src/index.ts"],
       "@ngheadlessui/tabs": ["libs/ui/tabs/src/index.ts"]
     }
   },
