@@ -1,6 +1,24 @@
-<headless-radio-group>
-  <headless-radio-label><p aria-label="label">Label</p></headless-radio-label>
-  <headless-radio-option></headless-radio-option>
-  <headless-radio-option></headless-radio-option>
-  <headless-radio-option></headless-radio-option>
+<headless-radio-group
+  [radioGroupName]="'plan'"
+  [Label]="'Label'"
+  [defaultOption]="'Startup'"
+>
+  <ng-container *ngFor="let plan of plans">
+    <headless-radio-option [value]="plan.name">
+      {{plan.name}}
+    </headless-radio-option>
+  </ng-container>
+</headless-radio-group>
+
+
+<headless-radio-group
+  [radioGroupName]="'name'"
+  [Label]="'name of peeps'"
+  [defaultOption]="'sam'"
+  class="flex mt-10 gap-5"
+>
+  <headless-radio-option [value]="'sam'">sam</headless-radio-option>
+  <headless-radio-option [value]="'kat'">kat</headless-radio-option>
+  <headless-radio-option [value]="'rich'">rich</headless-radio-option>
+
 </headless-radio-group>
