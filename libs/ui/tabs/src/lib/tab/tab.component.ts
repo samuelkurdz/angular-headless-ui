@@ -9,11 +9,13 @@ import { TabService } from '../tab.service';
 export class TabComponent implements OnDestroy, OnInit  {
   // event which is fired when change in selected tab occurs, returns index of selected tab
   @Output() tabIndexChange = new EventEmitter<number>();
-  @Input() disabled!: boolean;
+  @HostBinding('class.disabled-headless-tab') @Input() disabled!: boolean;
 
   destroy$: Subject<boolean> = new Subject<boolean>();
   currentPanelIndex!: number;
-  selected = false;
+
+  @HostBinding('attr.aria-selected')
+  @HostBinding('class.selected-headless-tab') selected = false;
 
   constructor(
     private tabService: TabService,
@@ -47,9 +49,11 @@ export class TabComponent implements OnDestroy, OnInit  {
     if (this.currentPanelIndex !== index) this.tabService.changeCurrentTabIndex(index);
   }
 
-  @HostBinding('class.selected-headless-tab') get isSelected() { return this.selected}
-  @HostBinding('class.unselected-headless-tab') get isNotSelected() { return !this.selected}
-  @HostBinding('class.disabled-headless-tab') get isDisabled() { return this.disabled}
+  @HostBinding('class.unselected-headless-tab') get isNotSelected() {
+    return !this.selected;
+  }
+
+  @HostBinding('attr.role') get role() { return 'tab' }
 
   ngOnDestroy() {
     this.destroy$.next(true);

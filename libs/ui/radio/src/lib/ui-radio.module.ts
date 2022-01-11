@@ -2,19 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RadioGroupComponent } from './group/group.component';
 import { LabelComponent } from './label/label.component';
-import { OptionComponent } from './option/option.component';
+import { RadioOptionDirective } from './radio-option.directive';
 
 @NgModule({
   imports: [CommonModule],
   declarations: [
     RadioGroupComponent,
     LabelComponent,
-    OptionComponent
+    RadioOptionDirective
   ],
   exports: [
     RadioGroupComponent,
     LabelComponent,
-    OptionComponent
+    RadioOptionDirective
   ]
 })
 export class UiRadioModule {}
