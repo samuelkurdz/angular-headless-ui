@@ -28,4 +28,12 @@ export class DemoRadioComponent {
     },
   ]
 
+  onSelect(event: any) {
+    console.log(event);
+  }
+
+  onDeSelect(event: any) {
+    console.log(event);
+  }
+
 }
