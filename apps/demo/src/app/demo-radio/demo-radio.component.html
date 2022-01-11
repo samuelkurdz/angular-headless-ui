@@ -1,4 +1,4 @@
-<headless-radio-group
+<!-- <headless-radio-group
   [radioGroupName]="'plan'"
   [Label]="'Label'"
   [defaultOption]="'Startup'"
@@ -8,17 +8,58 @@
       {{plan.name}}
     </headless-radio-option>
   </ng-container>
-</headless-radio-group>
+</headless-radio-group> -->
 
+<!-- <headless-radio-group
 
-<headless-radio-group
-  [radioGroupName]="'name'"
-  [Label]="'name of peeps'"
-  [defaultOption]="'sam'"
   class="flex mt-10 gap-5"
 >
-  <headless-radio-option [value]="'sam'">sam</headless-radio-option>
-  <headless-radio-option [value]="'kat'">kat</headless-radio-option>
-  <headless-radio-option [value]="'rich'">rich</headless-radio-option>
+<ng-container *ngFor="let plan of plans">
+  <headlessRadioOption>
+    {{plan.name}}
+  </headlessRadioOption>
+</ng-container>
+</headless-radio-group> -->
 
+<headless-radio-group class="flex flex-col w-full max-w-md mx-auto mt-10 gap-5">
+  <ng-container *ngFor="let plan of plans">
+    <!-- <headlessRadioOption [disabled]="plan.name === 'Startup'" -->
+    <headlessRadioOption [checked]="plan.name === 'Startup'"
+      class="relative rounded-lg shadow-md px-5 py-4 cursor-pointer flex items-center justify-between w-full focus:outline-none bg-white"
+    >
+      <div className="flex items-center">
+        {{ plan.name }}
+        <div>
+          <span> {{ plan.ram }}/{{ plan.cpus }} </span>
+          <span aria-hidden="true">&middot;</span>
+          <span> {{ plan.disk }}</span>
+        </div>
+      </div>
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="12" fill="#fff" fill-opacity="0.2" />
+        <path
+          d="M7 13l3 3 7-7"
+          stroke="#fff"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </headlessRadioOption>
+  </ng-container>
 </headless-radio-group>
+
+<!-- <div
+  class="relative rounded-lg shadow-md px-5 py-4 cursor-pointer flex focus:outline-none bg-white"
+>
+  <div className="flex items-center justify-between w-full">
+    <div className="flex items-center">
+      <div className="text-sm">
+        planName
+        <span> plan.ram/ plan.cpus </span>
+        <span aria-hidden="true">&middot;</span>
+        <span>plan.disk</span>
+      </div>
+    </div>
+  </div>
+</div> -->
