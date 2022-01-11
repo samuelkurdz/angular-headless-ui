@@ -66,7 +66,6 @@ export class RadioOptionDirective {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     @HostListener('click', ['$event']) onClick(event: any) {
-      // console.log(event);
       const parentNode = event.target.parentNode;
       const index = Array.prototype.indexOf.call(parentNode.children, event.target);
 
