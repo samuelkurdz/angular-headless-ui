@@ -1,42 +1,37 @@
-import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
-import { TabService } from '../tab.service';
+import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnInit, Output } from '@angular/core';
+import { TabGroupComponent } from '../tab-group/tab-group.component';
 
 @Component({
   selector: 'headless-tab',
   template: `<ng-content></ng-content>`,
 })
-export class TabComponent implements OnDestroy, OnInit  {
+export class TabComponent implements OnInit {
   // event which is fired when change in selected tab occurs, returns index of selected tab
   @Output() tabIndexChange = new EventEmitter<number>();
   @HostBinding('class.disabled-headless-tab') @Input() disabled!: boolean;
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
   currentPanelIndex!: number;
 
   @HostBinding('attr.aria-selected')
   @HostBinding('class.selected-headless-tab') selected = false;
 
+  tabGroup: TabGroupComponent;
   constructor(
-    private tabService: TabService,
+    tabGroup: TabGroupComponent,
     private ref: ElementRef
   ) {
-
+    this.tabGroup = tabGroup;
   }
 
   ngOnInit() {
-    this.tabService.currentPanelIndex
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(index => {
-      if (index === undefined) return;
-      this.currentPanelIndex = index;
-      this.tabIndexChange.emit(index);
-
-
-      const parentNode = this.ref.nativeElement.parentNode;
-      const refIndex = Array.prototype.indexOf.call(parentNode.children, this.ref.nativeElement);
-      this.selected = index === refIndex;
-    });
+    const parentNode = this.ref.nativeElement.parentNode;
+    const refIndex = Array.prototype.indexOf.call(parentNode.children, this.ref.nativeElement);
+    this.tabGroup.addTabHeads(this);
+    if (this.tabGroup.defaultTabIndex) {
+      if (refIndex === this.tabGroup.defaultTabIndex) this.selected = true;
+    } else {
+      if (refIndex === 0) this.selected = true;
+    }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,8 +40,9 @@ export class TabComponent implements OnDestroy, OnInit  {
     const parentNode = event.target.parentNode;
     const index = Array.prototype.indexOf.call(parentNode.children, event.target);
     if (this.disabled) return;
+    this.tabGroup.keyNavActions(event, index);
     // update tabIndex only if previous index != index of tab on which click event occures
-    if (this.currentPanelIndex !== index) this.tabService.changeCurrentTabIndex(index);
+    // if (this.currentPanelIndex !== index) this.tabService.changeCurrentTabIndex(index);
   }
 
   @HostBinding('class.unselected-headless-tab') get isNotSelected() {
@@ -55,8 +51,4 @@ export class TabComponent implements OnDestroy, OnInit  {
 
   @HostBinding('attr.role') get role() { return 'tab' }
 
-  ngOnDestroy() {
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe();
-  }
 }
