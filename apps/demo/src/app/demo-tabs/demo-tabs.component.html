@@ -18,10 +18,10 @@
   </headless-tab-group>
 </div>
 
-<div class="w-full max-w-md mx-auto px-20 py-16 sm:px-0">
+<!-- <div class="w-full max-w-md mx-auto px-20 py-16 sm:px-0">
   <headless-tab-group [defaultTabIndex]='1'>
     <div class="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
-      <headless-tab
+      <headless-tab [disabled]="index === 2"
         class="w-full cursor-pointer py-2.5 text-sm text-center leading-5 font-medium text-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white ring-opacity-60"
         *ngFor="let tab of ['Recent', 'Popular', 'Trending']; let index = index"
       >
@@ -36,7 +36,7 @@
       <ng-container *ngTemplateOutlet="item"></ng-container>
     </headlessTabPanel>
   </headless-tab-group>
-</div>
+</div> -->
 
 <!-- <div class="w-full max-w-md mx-auto px-2 py-16 sm:px-0">
   <headless-tabgroup class="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">

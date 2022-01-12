@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
 export class DemoTabsComponent {
 
   selectedIndex = 0;
-
   tabData = {
     Recent: [
       {
@@ -59,6 +58,7 @@ export class DemoTabsComponent {
       },
     ],
   };
+  mapTabData = Object.keys(this.tabData);
 
   updateSelected(index: number) {
     this.selectedIndex =  index;
