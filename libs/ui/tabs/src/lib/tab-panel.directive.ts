@@ -1,11 +1,11 @@
-import { Directive, ElementRef, EventEmitter, HostBinding, Input, Output, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, Renderer2 } from '@angular/core';
 import { TabGroupComponent } from '..';
 
 @Directive({
   selector: 'headlessTabPanel, [headlessTabPanel]',
   exportAs: 'headlessTabPanel'
 })
-export class TabPanelDirective {
+export class TabPanelDirective implements OnInit {
 
   /** fired when tab became active, $event:Tab equals to selected instance of Tab component */
   @Output() selectTab: EventEmitter<TabPanelDirective> = new EventEmitter();
@@ -36,11 +36,21 @@ export class TabPanelDirective {
 
   constructor(
     tabGroup: TabGroupComponent,
-    public elementRef: ElementRef,
+    public ref: ElementRef,
     public renderer: Renderer2
   ) {
     this.tabGroup = tabGroup;
     this.tabGroup.addTab(this);
+  }
+
+  ngOnInit(): void {
+    const parentNode = this.ref.nativeElement.parentNode;
+    const refIndex = Array.prototype.indexOf.call(parentNode.children, this.ref.nativeElement);
+    if (this.tabGroup.defaultTabIndex) {
+      if (refIndex === this.tabGroup.defaultTabIndex + 1) this.hidden = false;
+    } else {
+      if (refIndex === 1) this.hidden = false;
+    }
   }
 
 }
