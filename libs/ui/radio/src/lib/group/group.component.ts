@@ -3,7 +3,7 @@ import { RadioOptionDirective } from '../radio-option.directive';
 
 @Component({
   selector: 'headless-radio-group',
-  templateUrl: './group.component.html',
+  template: `<ng-content></ng-content>`
 })
 export class RadioGroupComponent {
   radios: RadioOptionDirective[] = [];
