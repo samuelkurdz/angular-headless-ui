@@ -1,17 +1,45 @@
-<!-- <headless-tablist>
+<div class="w-full max-w-md mx-auto px-20 py-16 sm:px-0">
+  <headless-tab-group>
+    <div class="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
       <headless-tab
-        [id]="tab" (selectedTabIndex)="updateSelected($event)"
-        [class.text-red-600]="selectedIndex === index"
-        *ngFor="let tab of ['Recent', 'Popular', 'Trending', 'Not found']; let index = index"
+        class="w-full cursor-pointer py-2.5 text-sm text-center leading-5 font-medium text-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white ring-opacity-60"
+        *ngFor="let tab of ['Recent', 'Popular', 'Trending']; let index = index"
       >
         {{ tab }}
       </headless-tab>
-    </headless-tablist>
-    <headless-tab-panel class="flex bg-white rounded-xl p-3" [panelTemplates]="[recent, popular, trending]">
-    </headless-tab-panel> -->
+    </div>
+  
+    <headlessTabPanel
+      class="flex bg-white rounded-xl p-3 mt-3"
+      *ngFor="let item of [recent, popular, trending]"
+    >
+      <ng-container *ngTemplateOutlet="item"></ng-container>
+    </headlessTabPanel>
+  </headless-tab-group>
+</div>
 
-<div class="w-full max-w-md mx-auto px-2 py-16 sm:px-0">
-  <headless-tablist class="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
+<!-- <div class="w-full max-w-md mx-auto px-20 py-16 sm:px-0">
+  <headless-tab-group>
+    <div class="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
+      <headless-tab
+        class="w-full cursor-pointer py-2.5 text-sm text-center leading-5 font-medium text-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white ring-opacity-60"
+        *ngFor="let tab of ['Recent', 'Popular', 'Trending']; let index = index"
+      >
+        {{ tab }}
+      </headless-tab>
+    </div>
+  
+    <headlessTabPanel
+      class="flex bg-white rounded-xl p-3 mt-3"
+      *ngFor="let item of [recent, popular, trending]"
+    >
+      <ng-container *ngTemplateOutlet="item"></ng-container>
+    </headlessTabPanel>
+  </headless-tab-group>
+</div> -->
+
+<!-- <div class="w-full max-w-md mx-auto px-2 py-16 sm:px-0">
+  <headless-tabgroup class="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
     <headless-tab
       class="w-full cursor-pointer py-2.5 text-sm text-center leading-5 font-medium text-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white ring-opacity-60"
       (tabIndexChange)="updateSelected($event)"
@@ -19,13 +47,14 @@
     >
       {{ tab }}
     </headless-tab>
-  </headless-tablist>
+  </headless-tabgroup>
   <headless-tab-panel
     class="flex bg-white rounded-xl p-3 mt-3"
     [panelTemplates]="[recent, popular, trending]"
   >
   </headless-tab-panel>
-</div>
+</div> -->
+
 <ng-template #recent>
   <ul class="w-full">
     <li
@@ -51,6 +80,7 @@
     </li>
   </ul>
 </ng-template>
+
 <ng-template #popular>
   <ul class="w-full">
     <li
@@ -76,6 +106,7 @@
     </li>
   </ul>
 </ng-template>
+
 <ng-template #trending>
   <ul class="w-full">
     <li
