@@ -26,8 +26,12 @@ export class TabComponent implements OnInit {
   ngOnInit() {
     const parentNode = this.ref.nativeElement.parentNode;
     const refIndex = Array.prototype.indexOf.call(parentNode.children, this.ref.nativeElement);
-    console.log(refIndex);
-    // if (refIndex === 0) this.
+    this.tabGroup.addTabHeads(this);
+    if (this.tabGroup.defaultTabIndex) {
+      if (refIndex === this.tabGroup.defaultTabIndex) this.selected = true;
+    } else {
+      if (refIndex === 0) this.selected = true;
+    }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
