@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TabPanelDirective } from '../tab-panel.directive';
 import { TabComponent } from '../tab/tab.component';
 
@@ -8,6 +8,8 @@ import { TabComponent } from '../tab/tab.component';
 })
 export class TabGroupComponent  {
   @Input() defaultTabIndex!: number;
+    /** fired when tab became active, $event:Tab equals to selected instance of Tab component */
+    @Output() changeTab: EventEmitter<number> = new EventEmitter();
 
   tabs: TabPanelDirective[] = [];
   tabHeaders: TabComponent[] = [];
@@ -27,7 +29,8 @@ export class TabGroupComponent  {
 
     this.tabHeaders.forEach((head, headIndex) => {
       headIndex === index ? head.selected = true : head.selected = false;
-    })
+    });
+    this.changeTab.emit(index);
   }
   
 

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnInit, Renderer2 } from '@angular/core';
 import { TabGroupComponent } from '..';
 
 @Directive({
@@ -6,12 +6,6 @@ import { TabGroupComponent } from '..';
   exportAs: 'headlessTabPanel'
 })
 export class TabPanelDirective implements OnInit {
-
-  /** fired when tab became active, $event:Tab equals to selected instance of Tab component */
-  @Output() selectTab: EventEmitter<TabPanelDirective> = new EventEmitter();
-  /** fired when tab became inactive, $event:Tab equals to deselected instance of Tab component */
-  @Output() deselectTab: EventEmitter<TabPanelDirective> = new EventEmitter();
-
   @HostBinding('attr.id') @Input() id?: string;
   /** if true tab can not be activated */
 
