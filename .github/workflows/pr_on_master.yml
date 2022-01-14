@@ -42,10 +42,10 @@ jobs:
           rm -rf node_modules && rm -rf dist && rm -rf docs && rm -rf coverage
           npm ci
       #5 - Run Linting
-      - name: Run lint
-        run: ./.github/scripts/run-linting.sh False
+      # - name: Run lint
+      #   run: ./.github/scripts/run-linting.sh False
       #6 - Run tests and submit coverage
-      - name: Tests coverage
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        run: ./.github/scripts/run-testing.sh False True $CODECOV_TOKEN
+      # - name: Tests coverage
+      #   env:
+      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      #   run: ./.github/scripts/run-testing.sh False True $CODECOV_TOKEN
