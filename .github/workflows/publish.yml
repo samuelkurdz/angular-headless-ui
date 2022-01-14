@@ -1,0 +1,100 @@
+name: Merge on main
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+jobs:
+  build:
+    if: "!contains(github.event.commits.*.message, '[skip-ci]')"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [15.x]
+
+    steps:
+      # Checkout code
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      # Make sure we have all branches
+      - name: Fetch other branches
+        run: git fetch --no-tags --prune --depth=5 origin main
+
+      # Setup node
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmjs.org'
+
+      # Run Install
+      - name: Install environment
+        run: |
+          rm -rf node_modules && rm -rf dist && rm -rf docs && rm -rf coverage
+          npm ci
+
+      # Generate Master Test Coverage
+      - name: Tests coverage
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: ./.github/scripts/run-testing.sh True True $CODECOV_TOKEN origin/main~1
+
+      # Run versioning on affected libraries
+      - name: Version
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
+          ./.github/scripts/library-version.sh
+
+      # Version the changelog of any library being released
+      - name: Changelog
+        run: ./.github/scripts/changelog-version.sh
+
+      # Build the libraries
+      - name: Build
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
+          ./.github/scripts/library-build.sh
+
+      # Deploy the library to the general NPM repository
+      - name: Deploy To General NPM
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
+          ./.github/scripts/library-publish.sh "https://registry.npmjs.org"
+
+      # Deploy the library to the Github NPM repository
+      - name: Deploy To Github NPM
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.GH_NPM_PACKAGE_PUBLISHER }}
+        run: |
+          npm config set //npm.pkg.github.com/:_authToken=$NPM_AUTH_TOKEN
+          ./.github/scripts/library-publish.sh "https://npm.pkg.github.com"
+
+      # Build the Typedoc documentation
+      - name: Build Docs
+        run: ./.github/scripts/build-docs.sh
+
+      # Commit all files changes including docs
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git add docs -f
+          git commit -m "Release [skip-ci]" -a || true
+
+      # Push the changes back to the repo
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          branch: main
+          github_token: ${{ secrets.ACTION_AUTH_TOKEN }}
+          tags: true
+          force: true
