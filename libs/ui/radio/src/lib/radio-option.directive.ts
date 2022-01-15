@@ -7,6 +7,7 @@ import { RadioGroupComponent } from '../lib/group/group.component';
 })
 export class RadioOptionDirective {
 
+    /** add id attribute to radio-option, if decleared by users */
   @HostBinding('attr.id') @Input() id?: string;
   @HostBinding('class.headless-radio') 'headless-radio' = true;
 
