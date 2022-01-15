@@ -54,12 +54,12 @@ jobs:
       #   run: ./.github/scripts/changelog-version.sh
 
       # Build the libraries
-      # - name: Build
-      #   env:
-      #     NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      #   run: |
-      #     npm config set //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
-      #     ./.github/scripts/library-build.sh
+      - name: Build
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
+          ./.github/scripts/library-build.sh
 
       # Deploy the library to the general NPM repository
       - name: Deploy To General NPM

@@ -7,7 +7,6 @@ import { TabGroupComponent } from '..';
 })
 export class TabPanelDirective implements OnInit {
   @HostBinding('attr.id') @Input() id?: string;
-  /** if true tab can not be activated */
 
   tabGroup: TabGroupComponent;
   protected _hidden = true;
