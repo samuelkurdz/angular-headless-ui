@@ -42,24 +42,24 @@ jobs:
       #   run: ./.github/scripts/run-testing.sh True True $CODECOV_TOKEN origin/main~1
 
       # Run versioning on affected libraries
-      - name: Version
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        run: |
-          npm config set //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
-          ./.github/scripts/library-version.sh
+      # - name: Version
+      #   env:
+      #     NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      #   run: |
+      #     npm config set //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
+      #     ./.github/scripts/library-version.sh
 
       # # Version the changelog of any library being released
       # - name: Changelog
       #   run: ./.github/scripts/changelog-version.sh
 
       # Build the libraries
-      - name: Build
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        run: |
-          npm config set //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
-          ./.github/scripts/library-build.sh
+      # - name: Build
+      #   env:
+      #     NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      #   run: |
+      #     npm config set //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
+      #     ./.github/scripts/library-build.sh
 
       # Deploy the library to the general NPM repository
       - name: Deploy To General NPM
