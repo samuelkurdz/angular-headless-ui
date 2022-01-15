@@ -49,9 +49,9 @@ jobs:
           npm config set //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
           ./.github/scripts/library-version.sh
 
-      # Version the changelog of any library being released
-      - name: Changelog
-        run: ./.github/scripts/changelog-version.sh
+      # # Version the changelog of any library being released
+      # - name: Changelog
+      #   run: ./.github/scripts/changelog-version.sh
 
       # Build the libraries
       - name: Build
