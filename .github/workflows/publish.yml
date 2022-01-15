@@ -77,9 +77,9 @@ jobs:
           npm config set //npm.pkg.github.com/:_authToken=$NPM_AUTH_TOKEN
           ./.github/scripts/library-publish.sh "https://npm.pkg.github.com"
 
-      # Build the Typedoc documentation
-      - name: Build Docs
-        run: ./.github/scripts/build-docs.sh
+      # # Build the Typedoc documentation
+      # - name: Build Docs
+      #   run: ./.github/scripts/build-docs.sh
 
       # Commit all files changes including docs
       - name: Commit files

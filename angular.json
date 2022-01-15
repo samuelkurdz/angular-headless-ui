@@ -172,8 +172,7 @@
           "builder": "@nrwl/angular:package",
           "outputs": ["dist/libs/ui/tabs"],
           "options": {
-            "project": "libs/ui/tabs/ng-package.json",
-            "tailwindConfig": "libs/ui/tabs/tailwind.config.js"
+            "project": "libs/ui/tabs/ng-package.json"
           },
           "configurations": {
             "production": {
