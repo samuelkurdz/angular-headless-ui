@@ -61,7 +61,7 @@ export class DemoTabsComponent {
   mapTabData = Object.keys(this.tabData);
 
   updateSelected(index: number) {
-    this.selectedIndex =  index;
+    console.log(index);
   }
 
 }
