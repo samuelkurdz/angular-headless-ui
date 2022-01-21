@@ -14,7 +14,6 @@ export class TabPanelDirective implements OnInit {
 
   /** tab hidden state toggle */
   @HostBinding('class.hidden')
-  @Input()
   get hidden(): boolean {
     return this._hidden;
   }
