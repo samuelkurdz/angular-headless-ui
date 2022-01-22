@@ -2,6 +2,10 @@
 
 Radio Groups give you the same functionality as native HTML radio inputs, without any of the styling. They're perfect for building out custom UIs for selectors.
 
+## [Demo](https://stackblitz.com/edit/ngheadless-radio-demo)
+
+---
+
 ## Installation
 
 ```bash
@@ -20,136 +24,101 @@ Clicking an option will select it, and when the Radio Group is focused, the arro
 
 ```html
 <headless-radio-group>
+  <!-- You can use the headlessRadioOption as a component -->
+  <headlessRadioOption>Option 1</headlessRadioOption>
+  <headlessRadioOption>Option 2</headlessRadioOption>
+  <headlessRadioOption>Option 3</headlessRadioOption>
+
+  <!--or as a directive -->
+  <div headlessRadioOption>Option 1</div>
+  <div headlessRadioOption>Option 2</div>
+  <div headlessRadioOption>Option 3</div>
+</headless-radio-group>
+```
+
+## Styling the checked radio item
+
+This is a headless component so there are no styles included by default. Instead, the components expose useful information via bound classes that you can use to apply styles yourself.
+
+To style the checked Radio, use the selected class `checked-headless-radio`, which tells you which radio is currently checked. For flexiblity.
+
+```scss
+.checked-headless-radio {
+  @apply bg-sky-900 bg-opacity-75 text-white;
+}
+```
+
+## Disabling a radio item
+
+To disable a radio, use the disabled input property on the `headlessRadioOption` component. Disabled radio items cannot be selected with the mouse.
+
+```html
+<headless-tab-group>
+  <headless-radio-group>
+    <!-- You can use the headlessRadioOption as a component -->
+    <headlessRadioOption [disabled]="true">Option 1</headlessRadioOption>
+    <headlessRadioOption>Option 2</headlessRadioOption>
+    <headlessRadioOption>Option 3</headlessRadioOption>
+
+    <!--or as a directive -->
+    <ng-container *ngFor="let plan of plans">
+      <div headlessRadioOption [disabled]="plan.name === 'monthly'">
+        {{ plan.name }}
+      </div>
+    </ng-container>
+  </headless-radio-group>
+</headless-tab-group>
+```
+
+To style disabled tabs, use the disabled class `disabled-headless-tab`,
+which tells you whether or not that tab is currently disabled.
+
+```scss
+.disabled-headless-radio {
+  @apply text-red-300 bg-yellow-700 hover:bg-white/[0.12] hover:text-white;
+}
+```
+
+## Specifying the default checked radio
+
+To select a radio is checked by default, use the checkedOptionIndex="number" property on the `headless-tab-group` component.
+
+```html
+<headless-radio-group [checkedOptionIndex]="1">
   <headlessRadioOption>Option 1</headlessRadioOption>
   <headlessRadioOption>Option 2</headlessRadioOption>
   <headlessRadioOption>Option 3</headlessRadioOption>
 </headless-radio-group>
 ```
 
-
-
-
-
-
-
-
-
-## Styling the selected tab
-
-This is a headless component so there are no styles included by default. Instead, the components expose useful information via bound classes that you can use to apply styles yourself.
-
-To style the selected Tab, use the selected class `selected-headless-tab`, which tells you whether or not that tab is currently selected. For flexiblity, the clas `unselected-headless-tab` is also available for use.
-
-```scss
-.selected-headless-tab {
-  @apply bg-white shadow;
-}
-.unselected-headless-tab {
-  @apply text-blue-100 hover:bg-white/[0.12] hover:text-white;
-}
-```
-
-## Disabling a tab
-
-To disable a tab, use the disabled input property on the Tab component. Disabled tabs cannot be selected with the mouse.
-
-```html
-<headless-tab-group>
-  <div>
-    <headless-tab [disabled]="true">Tab 1</headless-tab>
-    <headless-tab>Tab 2</headless-tab>
-    <headless-tab>Tab 3</headless-tab>
-  </div>
-
-  <headlessTabPanel>Content 1</headlessTabPanel>
-  <headlessTabPanel>Content 2</headlessTabPanel>
-  <headlessTabPanel>Content 3</headlessTabPanel>
-</headless-tab-group>
-
-<!-- If you are creating tabs from component data  -->
-<headless-tab-group>
-  <div>
-    <headless-tab
-      *ngFor="let tabName of ['Recent', 'Popular', 'Trending']"
-      [disabled]="tabName === 'Recent'"
-    >
-      {{ tabName }}
-    </headless-tab>
-  </div>
-
-  <headlessTabPanel>Content 1</headlessTabPanel>
-  <headlessTabPanel>Content 2</headlessTabPanel>
-  <headlessTabPanel>Content 3</headlessTabPanel>
-</headless-tab-group>
-```
-
-To style disabled tabs, use the disabled class `disabled-headless-tab`, which tells you whether or not that tab is currently disabled.
-
-```scss
-.disabled-headless-tab {
-  @apply text-red-300 bg-yellow-700 hover:bg-white/[0.12] hover:text-white;
-}
-```
-
-## Styling the selected tab
-
-To change which tab is selected by default, use the defaultTabIndex="number" property on the TabGroup component.
-
-```html
-<headless-tab-group [defaultTabIndex]="2">
-  <div>
-    <headless-tab>Tab 1</headless-tab>
-    <headless-tab>Tab 2</headless-tab>
-    <headless-tab>Tab 3</headless-tab>
-  </div>
-
-  <headlessTabPanel>Content 1</headlessTabPanel>
-  <headlessTabPanel>Content 2</headlessTabPanel>
-  <headlessTabPanel>Content 3</headlessTabPanel>
-</headless-tab-group>
-```
-
 ## Listening for changes
 
-To run a function whenever the selected tab changes, listen to emissions from the (changeTab) EventEmitter on the TabGroup component. (changeTab) emits the index ($event) of the active tab.
+To run a function whenever the checked radio changes, listen to emissions from the (changeRadio) EventEmitter on the `headless-radio-group` component. (changeRadio) emits the index ($event) of the checked radio.
 
 ```html
-<headless-tab-group (changeTab)="listenToChangeInTabs($event)">
-  <div>
-    <headless-tab>Tab 1</headless-tab>
-    <headless-tab>Tab 2</headless-tab>
-    <headless-tab>Tab 3</headless-tab>
-  </div>
-
-  <headlessTabPanel>Content 1</headlessTabPanel>
-  <headlessTabPanel>Content 2</headlessTabPanel>
-  <headlessTabPanel>Content 3</headlessTabPanel>
-</headless-tab-group>
+<headless-radio-group (changeRadio)="listenToChangeInRadio($event)">
+  <headlessRadioOption>Option 1</headlessRadioOption>
+  <headlessRadioOption>Option 2</headlessRadioOption>
+  <headlessRadioOption>Option 3</headlessRadioOption>
+</headless-radio-group>
 ```
 
 ## Component APIs
 
-### headless-tab-group
+### headless-radio-group
 
-The main TabGroup component.
+The main Radio Group component.
 
-| Props        | Default | Description                                                                      |
-| ------------ | ------- | -------------------------------------------------------------------------------- |
-| defaultIndex | 0       | `Number` <br/> The default selected index                                        |
-| (changeTab)  |         | EventEmitter<number> <br /> This is fired when there is a change in selected tab |
+| Props              | Default | Description                                                                       |
+| ------------------ | ------- | --------------------------------------------------------------------------------- |
+| checkedOptionIndex | 0       | `Number` <br/> The index of checked radio                                         |
+| (changeRadio)      |         | EventEmitter<number> <br /> This is fired when there is a change in checked radio |
 
-### headless-tab
+### headlessRadioOption
 
-The Tab component.
+The Radio component.
 
-| Props    | Default | Description                                                   |
-| -------- | ------- | ------------------------------------------------------------- |
-| disabled | false   | `Boolean` <br/> Whether or not the Tab is currently disabled. |
-
-### headlessTabPanel
-
-The Tab component.
-
-| Props | Default   | Description                                                  |
-| ----- | --------- | ------------------------------------------------------------ |
-| id    | undefined | `String` <br/> Whether or not the Tab is currently disabled. |
+| Props    | Default   | Description                                                                        |
+| -------- | --------- | ---------------------------------------------------------------------------------- |
+| id       | undefined | `String` <br/> unique identifier of the radio option                               |
+| disabled | false     | `Boolean` <br/> Whether or not selected of the Rasio option is currently disabled. |

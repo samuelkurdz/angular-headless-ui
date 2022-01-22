@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, Input, OnInit } from '@angular/core';
 import { RadioGroupComponent } from '../lib/group/group.component';
 
 @Directive({
@@ -17,7 +17,6 @@ export class RadioOptionDirective implements OnInit {
   /** if true radioOption can not be selected */
   @HostBinding('class.disabled-headless-radio') @Input() disabled = false;
   /** fired when radioOption became active, $event:radioOption equals to selected instance of radioOption component */
-  @Output() selectRadioOption: EventEmitter<number> = new EventEmitter();
 
 
   protected _checked = false;
@@ -41,8 +40,6 @@ export class RadioOptionDirective implements OnInit {
       return;
     }
 
-    if (active) this.selectRadioOption.emit(this.radioIndex);
-
     this._checked = active;
 
   }
@@ -52,7 +49,7 @@ export class RadioOptionDirective implements OnInit {
     public ref: ElementRef,
   ) {
     this.radioGroup = radioGroup;
-    this.radioGroup.addTab(this);
+    this.radioGroup.addRadioOption(this);
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { RadioOptionDirective } from '../radio-option.directive';
 
 @Component({
@@ -8,11 +8,12 @@ import { RadioOptionDirective } from '../radio-option.directive';
 export class RadioGroupComponent {
   @Input() checkedOptionIndex!: number;
   @Output() changeRadio: EventEmitter<number> = new EventEmitter();
+  @HostBinding('attr.role') get role() { return 'radiogroup' }
 
   radios: RadioOptionDirective[] = [];
 
-  addTab(tab: RadioOptionDirective): void {
-    this.radios.push(tab);
+  addRadioOption(radioOption: RadioOptionDirective): void {
+    this.radios.push(radioOption);
   }
 
   keyNavActions(event: KeyboardEvent, index: number) {

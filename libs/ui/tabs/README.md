@@ -87,7 +87,7 @@ To style disabled tabs, use the disabled class `disabled-headless-tab`, which te
 }
 ```
 
-## Styling the selected tab
+## Specifying the default tab
 
 To change which tab is selected by default, use the defaultTabIndex="number" property on the TabGroup component.
 
@@ -146,6 +146,6 @@ The Tab component.
 
 The Tab component.
 
-| Props | Default   | Description                                                  |
-| ----- | --------- | ------------------------------------------------------------ |
-| id    | undefined | `String` <br/> Whether or not the Tab is currently disabled. |
+| Props | Default   | Description                                           |
+| ----- | --------- | ----------------------------------------------------- |
+| id    | undefined | `String` <br/> unique identifier of the tab component |

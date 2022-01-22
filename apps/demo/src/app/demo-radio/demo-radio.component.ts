@@ -26,13 +26,14 @@ export class DemoRadioComponent {
       cpus: '12 CPUs',
       disk: '1024 GB SSD disk',
     },
-  ]
+  ];
 
-  onSelect(event: any) {
+
+  onSelect(event: number) {
     console.log(event);
   }
 
-  onDeSelect(event: any) {
+  onDeSelect(event: number) {
     console.log(event);
   }
 

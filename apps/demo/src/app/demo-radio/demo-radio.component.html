@@ -1,16 +1,16 @@
 <!-- <headless-radio-group class="flex mt-10 gap-5">
   <ng-container *ngFor="let plan of plans">
-    <headlessRadioOption>
+    <div headlessRadioOption [disabled]="plan.name === 'Startup'">
       {{ plan.name }}
-    </headlessRadioOption>
+    </div>
   </ng-container>
 </headless-radio-group> -->
 
-<headless-radio-group (changeRadio)="onDeSelect($event)"
-  class="flex flex-col w-full max-w-md mx-auto mt-10 gap-5"
+<headless-radio-group
+  class="flex flex-col w-full max-w-md mx-auto mt-10 gap-2"
   [checkedOptionIndex]="1"
 >
-  <headlessRadioOption (selectRadioOption)="onSelect($event)"
+  <headlessRadioOption
     *ngFor="let plan of plans"
     class="relative rounded-lg shadow-md px-5 py-4 cursor-pointer flex items-center justify-between w-full focus:outline-none bg-white
     focus:ring-2 focus:ring-offset-2 focus:ring-offset-sky-300 focus:ring-white focus:ring-opacity-60"
