@@ -2,6 +2,10 @@
 
 Easily create accessible, fully customizable tab interfaces, with robust focus management and coming keyboard navigation support.
 
+## [Demo](https://stackblitz.com/edit/ngheadless-tabs-demo)
+
+---
+
 ## Installation
 
 ```bash
@@ -24,9 +28,16 @@ Tabs are built using the headless-tab-group, headless-tab, and headlessTabPanel 
     <headless-tab>Tab 3</headless-tab>
   </div>
 
+  <!-- You can use the headlessTabPanel as a component -->
   <headlessTabPanel>Content 1</headlessTabPanel>
   <headlessTabPanel>Content 2</headlessTabPanel>
   <headlessTabPanel>Content 3</headlessTabPanel>
+
+  <!--or as a directive
+    <div headlessTabPanel>Content 1</div>
+    <div headlessTabPanel>Content 2</div>
+    <div headlessTabPanel>Content 3</div>
+  -->
 </headless-tab-group>
 ```
 
@@ -47,7 +58,7 @@ To style the selected Tab, use the selected class `selected-headless-tab`, which
 
 ## Disabling a tab
 
-To disable a tab, use the disabled input property on the Tab component. Disabled tabs cannot be selected with the mouse.
+To disable a tab, use the disabled input property on the `headlessTabPanel` component. Disabled tabs cannot be selected with the mouse.
 
 ```html
 <headless-tab-group>
@@ -87,7 +98,7 @@ To style disabled tabs, use the disabled class `disabled-headless-tab`, which te
 }
 ```
 
-## Styling the selected tab
+## Specifying the default tab
 
 To change which tab is selected by default, use the defaultTabIndex="number" property on the TabGroup component.
 
@@ -146,6 +157,6 @@ The Tab component.
 
 The Tab component.
 
-| Props | Default   | Description                                                  |
-| ----- | --------- | ------------------------------------------------------------ |
-| id    | undefined | `String` <br/> Whether or not the Tab is currently disabled. |
+| Props | Default   | Description                                           |
+| ----- | --------- | ----------------------------------------------------- |
+| id    | undefined | `String` <br/> unique identifier of the tab component |

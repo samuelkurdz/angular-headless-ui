@@ -1,3 +1,7 @@
 .checked-headless-radio {
   @apply bg-sky-900 bg-opacity-75 text-white;
 }
+
+.disabled-headless-radio {
+  @apply bg-red-900 bg-opacity-40 text-white;
+}

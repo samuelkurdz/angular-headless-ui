@@ -6,10 +6,10 @@ import { TabComponent } from '../tab/tab.component';
   selector: 'headless-tab-group',
   template: `<ng-content></ng-content>`,
 })
-export class TabGroupComponent  {
+export class TabGroupComponent {
   @Input() defaultTabIndex!: number;
-    /** fired when tab became active, $event:Tab equals to selected instance of Tab component */
-    @Output() changeTab: EventEmitter<number> = new EventEmitter();
+  /** fired when tab became active, $event:Tab equals to selected instance of Tab component */
+  @Output() changeTab: EventEmitter<number> = new EventEmitter();
 
   tabs: TabPanelDirective[] = [];
   tabHeaders: TabComponent[] = [];
@@ -32,6 +32,6 @@ export class TabGroupComponent  {
     });
     this.changeTab.emit(index);
   }
-  
+
 
 }
