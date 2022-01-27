@@ -70,8 +70,8 @@ To disable a radio, use the disabled input property on the `headlessRadioOption`
 </headless-tab-group>
 ```
 
-To style disabled tabs, use the disabled class `disabled-headless-tab`,
-which tells you whether or not that tab is currently disabled.
+To style disabled radio, use the disabled class `disabled-headless-radio`,
+which tells you whether or not that radio option is currently disabled.
 
 ```scss
 .disabled-headless-radio {
