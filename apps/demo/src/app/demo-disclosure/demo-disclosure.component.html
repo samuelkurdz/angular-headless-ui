@@ -1,0 +1,33 @@
+<div class="w-full max-w-md p-2 mx-auto bg-white rounded-2xl">
+  <headless-disclosure>
+    <headless-disclosure-button
+      class="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
+    >
+      disclose 1
+    </headless-disclosure-button>
+    <div headlessDisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
+      content 1
+    </div>
+  </headless-disclosure>
+
+  <headless-disclosure>
+    <headless-disclosure-button
+      class="mt-2 flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
+    >
+      disclose 2
+    </headless-disclosure-button>
+    <div headlessDisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
+      content 2
+    </div>
+  </headless-disclosure>
+  <headless-disclosure [defaultState]="true">
+    <headless-disclosure-button
+      class="mt-2 flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
+    >
+      disclose 3
+    </headless-disclosure-button>
+    <div headlessDisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
+      content 3
+    </div>
+  </headless-disclosure>
+</div>
