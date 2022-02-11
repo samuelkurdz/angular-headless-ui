@@ -10,6 +10,8 @@ export class DisclosureButtonComponent implements OnInit {
   disclosure: DisclosureComponent;
   protected _disabled = false;
 
+  @HostBinding('style.cursor') cursorType = 'pointer';
+
   @HostBinding('class.disabled')
   get disabled(): boolean {
     return this._disabled;
