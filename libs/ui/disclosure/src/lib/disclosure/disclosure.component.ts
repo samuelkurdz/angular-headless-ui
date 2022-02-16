@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnChanges, Output } from '@angular/core';
 import { DisclosureButtonComponent } from '../disclosure-button/disclosure-button.component';
 import { DisclosurePanelDirective } from '../disclosure-panel.directive';
 
