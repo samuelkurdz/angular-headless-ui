@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { DisclosureButtonComponent } from '../disclosure-button/disclosure-button.component';
 import { DisclosurePanelDirective } from '../disclosure-panel.directive';
 
@@ -6,37 +6,36 @@ import { DisclosurePanelDirective } from '../disclosure-panel.directive';
   selector: 'headless-disclosure',
   template: `<ng-content></ng-content>`,
 })
-export class DisclosureComponent {
+export class DisclosureComponent implements OnChanges {
   @Input() defaultState!: boolean;
   @Input() disabled!: boolean;
   @Output() panelChange: EventEmitter<boolean> = new EventEmitter();
-
-  @HostBinding('class.close-disclosure') get isShown(): boolean {
-    return this._isShown;
-  }
-
-  set isShown(hidden: boolean) {
-    if (this._isShown === hidden) {
-      return;
-    }
-
-    this._isShown = hidden;
-  }  
   
-  _isShown!: boolean;
+  private _isOpen = false;
   displayPanel!: DisclosurePanelDirective;
   disclosureButton!: DisclosureButtonComponent;
 
-  updateOpenState(state: boolean) {
-    this.panelChange.emit(state);
-    this.isShown = state;
+  @HostBinding('class.opened-headless-disclosure') get isOpened(): boolean {
+    return this._isOpen;
+  }
+
+  set isOpened(hidden: boolean) {
+    if (this._isOpen === hidden) {
+      return;
+    }
+
+    this._isOpen = hidden;
+  } 
+
+  ngOnChanges(): void {
+    this._isOpen = !!this.defaultState;
   }
 
   addPanel(panel: DisclosurePanelDirective): void {
     this.displayPanel = panel;
     this.panelChange.emit(panel.hidden);
-    this.updateOpenState(panel.hidden);
   }
+
   
   addButton(button: DisclosureButtonComponent): void {
     this.disclosureButton = button;
@@ -44,6 +43,12 @@ export class DisclosureComponent {
   
   keyNavActions() {
     this.displayPanel.hidden = !this.displayPanel.hidden;
-    this.updateOpenState(this.displayPanel.hidden);
+    this.updateOpenState();
+  }
+
+
+  updateOpenState() {
+    this.isOpened = !this._isOpen;
+    this.panelChange.emit(this.isOpened);
   }
 }

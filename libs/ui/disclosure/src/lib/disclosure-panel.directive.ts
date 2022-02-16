@@ -9,8 +9,7 @@ export class DisclosurePanelDirective implements OnInit {
   disclosure: DisclosureComponent;
   protected _hidden = false;
 
-  @HostBinding('class.hidden')
-  get hidden(): boolean {
+  @HostBinding('class.hidden') get hidden(): boolean {
     return this._hidden;
   }
 

@@ -1,10 +1,13 @@
 <div class="w-full max-w-md p-2 mx-auto bg-white rounded-2xl">
 
-  <headless-disclosure (panelChange)="listenToChangeInTabs($event)" *ngFor="let item of options">
+  <headless-disclosure (panelChange)="listenToChangeInTabs($event)" *ngFor="let item of options; let index = index" [defaultState]="index === 0">
     <headless-disclosure-button
       class="mt-2 flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
     >
-      {{item.buttoneText}}
+      <span>{{item.buttoneText}}</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
+      </svg>
     </headless-disclosure-button>
     <div headlessDisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
       {{item.description}}

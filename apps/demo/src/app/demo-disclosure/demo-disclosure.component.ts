@@ -19,7 +19,7 @@ export class DemoDisclosureComponent {
   ];
 
   listenToChangeInTabs(e: boolean) {
-    console.log(e)
+    // console.log(e)
   }
 
 }
