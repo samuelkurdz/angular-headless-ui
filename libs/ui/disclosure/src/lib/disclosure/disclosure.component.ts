@@ -7,7 +7,7 @@ import { DisclosurePanelDirective } from '../disclosure-panel.directive';
   template: `<ng-content></ng-content>`,
 })
 export class DisclosureComponent implements OnChanges {
-  @Input() defaultState!: boolean;
+  @Input() defaultOpenState!: boolean;
   @Input() disabled!: boolean;
   @Output() panelChange: EventEmitter<boolean> = new EventEmitter();
   
@@ -28,7 +28,7 @@ export class DisclosureComponent implements OnChanges {
   } 
 
   ngOnChanges(): void {
-    this._isOpen = !!this.defaultState;
+    this._isOpen = !!this.defaultOpenState;
   }
 
   addPanel(panel: DisclosurePanelDirective): void {

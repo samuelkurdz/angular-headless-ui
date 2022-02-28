@@ -1,8 +1,8 @@
-# ui-radio
+# ui-disclosure
 
-Radio Groups give you the same functionality as native HTML radio inputs, without any of the styling. They're perfect for building out custom UIs for selectors.
+A simple, accessible foundation for building custom UIs that show and hide content, like togglable accordion panels.
 
-## [Demo](https://stackblitz.com/edit/ngheadless-radio-demo)
+## [Demo](https://stackblitz.com/edit/ngheadless-disclosure-demo)
 
 ---
 
@@ -10,115 +10,81 @@ Radio Groups give you the same functionality as native HTML radio inputs, withou
 
 ```bash
 # npm
-npm install @ngheadlessui/radio
+npm install @ngheadlessui/disclosure
 
 # Yarn
-yarn add @ngheadlessui/radio
+yarn add @ngheadlessui/disclosure
 ```
 
 ## Basic Example
 
-Radio Groups are built using the `headless-tab-group`, and `headlessRadioOption` components.
+Disclosures are built using the `headless-disclosure`, `headless-disclosure-button` and `headlessDisclosurePanel` components.
 
-Clicking an option will select it, and when the Radio Group is focused, the arrow keys will change the selected option.
+Your `headlessDisclosurePanel` will be shown/hidden automatically based on the internal open state tracked within the `headless-disclosure` component itself.
 
 ```html
-<headless-radio-group>
-  <!-- You can use the headlessRadioOption as a component -->
-  <headlessRadioOption>Option 1</headlessRadioOption>
-  <headlessRadioOption>Option 2</headlessRadioOption>
-  <headlessRadioOption>Option 3</headlessRadioOption>
-
-  <!--or as a directive -->
-  <div headlessRadioOption>Option 1</div>
-  <div headlessRadioOption>Option 2</div>
-  <div headlessRadioOption>Option 3</div>
-</headless-radio-group>
+  <headless-disclosure (panelChange)="listenToChangeInTabs($event)">
+    <headless-disclosure-button>
+      buttoneText
+    </headless-disclosure-button>
+    <div headlessDisclosurePanel>
+      description
+    </div>
+  </headless-disclosure>
 ```
 
-## Styling the checked radio item
+## Styling the opened `headless-disclosure` item
 
 This is a headless component so there are no styles included by default. Instead, the components expose useful information via bound classes that you can use to apply styles yourself.
 
-To style the checked Radio, use the selected class `checked-headless-radio`, which tells you which radio is currently checked. For flexiblity.
+To style the opened `headless-disclosure`, use the selected class `opened-headless-disclosure `, which tells you which `headlessDisclosurePanel` is currently opened.
 
 ```scss
-.checked-headless-radio {
-  @apply bg-sky-900 bg-opacity-75 text-white;
+.opened-headless-disclosure {
+  svg {
+    transform: rotate(180deg);
+  }
 }
 ```
 
-## Disabling a radio item
+## Specifying the default state for the disclosure panel
 
-To disable a radio, use the disabled input property on the `headlessRadioOption` component. Disabled radio items cannot be selected with the mouse.
+To make a disclosure open by default, use the defaultOpenState input boolean property on the `headless-disclosure` component. If set to true, the panel is open by default.
 
-```html
-<headless-tab-group>
-  <headless-radio-group>
-    <!-- You can use the headlessRadioOption as a component -->
-    <headlessRadioOption [disabled]="true">Option 1</headlessRadioOption>
-    <headlessRadioOption>Option 2</headlessRadioOption>
-    <headlessRadioOption>Option 3</headlessRadioOption>
-
-    <!--or as a directive -->
-    <ng-container *ngFor="let plan of plans">
-      <div headlessRadioOption [disabled]="plan.name === 'monthly'">
-        {{ plan.name }}
-      </div>
-    </ng-container>
-  </headless-radio-group>
-</headless-tab-group>
-```
-
-To style disabled radio, use the disabled class `disabled-headless-radio`,
-which tells you whether or not that radio option is currently disabled.
-
-```scss
-.disabled-headless-radio {
-  @apply text-red-300 bg-yellow-700 hover:bg-white/[0.12] hover:text-white;
-}
-```
-
-## Specifying the default checked radio
-
-To select a radio is checked by default, use the checkedOptionIndex="number" property on the `headless-tab-group` component.
 
 ```html
-<headless-radio-group [checkedOptionIndex]="1">
-  <headlessRadioOption>Option 1</headlessRadioOption>
-  <headlessRadioOption>Option 2</headlessRadioOption>
-  <headlessRadioOption>Option 3</headlessRadioOption>
-</headless-radio-group>
+  <headless-disclosure [defaultOpenState]="true">
+    <headless-disclosure-button>
+      buttoneText
+    </headless-disclosure-button>
+    <div headlessDisclosurePanel>
+      description
+    </div>
+  </headless-disclosure>
 ```
 
 ## Listening for changes
 
-To run a function whenever the checked radio changes, listen to emissions from the (changeRadio) EventEmitter on the `headless-radio-group` component. (changeRadio) emits the index ($event) of the checked radio.
-
+To run a function whenever the panel state changes, listen to emissions from the (panelChange) EventEmitter on the `headless-disclosure` component. (panelChange) emits the boolean property ($event) of the clicked disclosure panel.
 ```html
-<headless-radio-group (changeRadio)="listenToChangeInRadio($event)">
-  <headlessRadioOption>Option 1</headlessRadioOption>
-  <headlessRadioOption>Option 2</headlessRadioOption>
-  <headlessRadioOption>Option 3</headlessRadioOption>
-</headless-radio-group>
+  <headless-disclosure (panelChange)="listenToChangeInTabs($event)">
+    <headless-disclosure-button>
+      buttoneText
+    </headless-disclosure-button>
+    <div headlessDisclosurePanel>
+      description
+    </div>
+  </headless-disclosure>
 ```
 
 ## Component APIs
 
-### headless-radio-group
+### headless-disclosure
 
-The main Radio Group component.
+The main Disclosure component.
 
 | Props              | Default | Description                                                                       |
 | ------------------ | ------- | --------------------------------------------------------------------------------- |
-| checkedOptionIndex | 0       | `Number` <br/> The index of checked radio                                         |
-| (changeRadio)      |         | EventEmitter<number> <br /> This is fired when there is a change in checked radio |
+| defaultOpenState | false      | `Boolean` <br/> The default state of the disclosure component                                         |
+| (panelChange)      |         | EventEmitter<boolean> <br /> This is fired when there is a change in the open state of the disclosure |
 
-### headlessRadioOption
-
-The Radio component.
-
-| Props    | Default   | Description                                                                        |
-| -------- | --------- | ---------------------------------------------------------------------------------- |
-| id       | undefined | `String` <br/> unique identifier of the radio option                               |
-| disabled | false     | `Boolean` <br/> Whether or not selected of the Rasio option is currently disabled. |

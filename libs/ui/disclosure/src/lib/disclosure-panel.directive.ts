@@ -29,7 +29,7 @@ export class DisclosurePanelDirective implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.disclosure.defaultState) {
+    if (this.disclosure.defaultOpenState) {
       this.hidden = false;
     } else {
       this.hidden = true;
