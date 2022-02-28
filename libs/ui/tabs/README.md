@@ -14,6 +14,9 @@ npm install @ngheadlessui/tabs
 
 # Yarn
 yarn add @ngheadlessui/tabs
+
+# import the lib into module you want to use it in
+import { UiTabsModule } from '@ngheadlessui/tabs';
 ```
 
 ## Basic Example

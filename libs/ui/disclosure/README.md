@@ -14,6 +14,9 @@ npm install @ngheadlessui/disclosure
 
 # Yarn
 yarn add @ngheadlessui/disclosure
+
+# import the lib into module you want to use it in
+import { UiDisclosureModule } from '@ngheadlessui/disclosure';
 ```
 
 ## Basic Example
