@@ -14,6 +14,9 @@ npm install @ngheadlessui/radio
 
 # Yarn
 yarn add @ngheadlessui/radio
+
+# import the lib into module you want to use it in
+import { UiRadioModule } from '@ngheadlessui/radio';
 ```
 
 ## Basic Example

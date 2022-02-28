@@ -1,6 +1,6 @@
 <div class="w-full max-w-md p-2 mx-auto bg-white rounded-2xl">
 
-  <headless-disclosure (panelChange)="listenToChangeInTabs($event)" *ngFor="let item of options; let index = index" [defaultState]="index === 0">
+  <headless-disclosure [defaultOpenState]="index === 1" (panelChange)="listenToChangeInTabs($event)" *ngFor="let item of options; let index = index">
     <headless-disclosure-button
       class="mt-2 flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
     >
